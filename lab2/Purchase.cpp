@@ -12,17 +12,12 @@ int Purchase::get_quantity() {
 }
 
 void Purchase::set_product_name(string name) {
-    if (name == "") {
-        cout << "\nName must be not empty!\n";
-        return;
-    }
-
     product_name = name;
 }
 
 void Purchase::set_price(float price) {
-    if (price <= 0) {
-        cout << "\nPrice must be greater than zero!\n";
+    if (price < 0) {
+        cout << "\nPrice must be positive or zero!\n";
         return;
     }
 
@@ -30,8 +25,8 @@ void Purchase::set_price(float price) {
 }
 
 void Purchase::set_quantity(int quantity) {
-    if (quantity <= 0) {
-        cout << "\nQuantity must be greater than zero!\n";
+    if (quantity < 0) {
+        cout << "\nQuantity must be positive or zero!\n";
         return;
     }
 
