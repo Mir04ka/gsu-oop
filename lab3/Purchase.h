@@ -12,6 +12,12 @@ private:
     int quantity;
 
 public:
+    Purchase();
+    Purchase(string productName, float price, int quantity);
+    Purchase(const Purchase& pur);
+    Purchase(string productName);
+    ~Purchase();
+
     string getProductName();
     float getPrice();
     int getQuantity();

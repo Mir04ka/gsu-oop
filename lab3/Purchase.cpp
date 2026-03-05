@@ -1,5 +1,29 @@
 #include "Purchase.h"
 
+Purchase::Purchase() {
+    productName = "";
+    price = 0;
+    quantity = 0;
+}
+
+Purchase::Purchase(string productName, float price, int quantity) {
+    this->productName = productName;
+    this->price = price;
+    this->quantity = quantity;
+}
+
+Purchase::Purchase(const Purchase& pur) {
+    *this = pur;
+}
+
+Purchase::Purchase(string productName) : Purchase() {
+    this->productName = productName;
+}
+
+Purchase::~Purchase() {
+    cout << "\nDestructor!\n";
+}
+
 string Purchase::getProductName() {
     return productName;
 }
@@ -34,7 +58,7 @@ void Purchase::setQuantity(int quantity) {
 }
 
 void Purchase::print() {
-    cout << "\nPurchase:\nProduct name: " << productName << "\nPrice: " << price << "\nQuantity: " << quantity;
+    cout << "\nPurchase:\nProduct name: " << productName << "\nPrice: " << price << "\nQuantity: " << quantity << "\n\n";
 }
 
 void Purchase::input() {
