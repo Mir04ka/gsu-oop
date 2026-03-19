@@ -17,7 +17,7 @@ void PurchaseCollection::add(Purchase* p) {
 
 void PurchaseCollection::remove(int i) {
     delete arr[i];
-    for (int j = i; j < size; j++) {
+    for (int j = i; j < size - 1; j++) {
         arr[j] = arr[j + 1];
     }
     size--;
@@ -56,6 +56,6 @@ void PurchaseCollection::print() {
     cout << "Collection:\n";
 
     for (int i = 0; i < size; i++) {
-        cout << arr[i] << "\n";
+        arr[i]->output();
     }
 }
