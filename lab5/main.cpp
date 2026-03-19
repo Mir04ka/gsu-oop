@@ -36,11 +36,3 @@ int main() {
 
     return 0;
 }
-
-// void add(Purchase* p);
-// void remove(int i);
-// int getSize();
-// Purchase* get(int i);
-// void swap(int i, int j);
-// void sort();
-// void print();
