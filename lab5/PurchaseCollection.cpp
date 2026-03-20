@@ -1,16 +1,34 @@
 #include "PurchaseCollection.h"
 
-PurchaseCollection::PurchaseCollection() {
+PurchaseCollection::PurchaseCollection(int s) {
+    arr = new Purchase*[s];
     size = 0;
+    maxSize = s;
 }
 
 PurchaseCollection::~PurchaseCollection() {
     for (int i = 0; i < size; i++) {
         delete arr[i];
     }
+    delete[] arr;
 }
 
 void PurchaseCollection::add(Purchase* p) {
+    if (size >= maxSize) {
+        maxSize *= 2;
+
+        Purchase** newArr = new Purchase*[maxSize];
+
+        for (int i = 0; i < size; i++) {
+            newArr[i] = arr[i];
+        }
+
+        delete[] arr;
+        arr = newArr;
+
+        cout << "\nNew max size: " << maxSize << "\n";
+    }
+
     arr[size] = p;
     size++;
 }

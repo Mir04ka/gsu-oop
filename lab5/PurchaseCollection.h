@@ -5,11 +5,12 @@
 
 class PurchaseCollection {
 private:
-    Purchase* arr[25];
+    Purchase** arr;
     int size;
+    int maxSize;
 
 public:
-    PurchaseCollection();
+    PurchaseCollection(int s);
     ~PurchaseCollection();
 
     void add(Purchase* p);

@@ -6,7 +6,7 @@
 #include "PurchaseCollection.h"
 
 int main() {
-    PurchaseCollection pc;
+    PurchaseCollection pc(1);
 
     Purchase* pur1 = new Purchase("First", 1.33, 2);
     Purchase* pur2 = new Purchase("Second", 1.33, 2);
