@@ -1,5 +1,7 @@
 #include "Purchase.h"
 
+#include "Exception.h"
+
 Purchase::Purchase() {
     productName = "";
     price = 0;
@@ -8,8 +10,12 @@ Purchase::Purchase() {
 
 Purchase::Purchase(string productName, float price, int quantity) {
     this->productName = productName;
-    this->price = price;
+    this->price = 0;
     this->quantity = quantity;
+
+    if (price < 0) {
+        throw Exception("Purchase constructor got price: " + to_string(price));
+    }
 }
 
 Purchase::Purchase(const Purchase& pur) {
@@ -41,8 +47,7 @@ void Purchase::setProductName(string name) {
 
 void Purchase::setPrice(float price) {
     if (price < 0) {
-        cout << "\nPrice must be positive or zero!\n";
-        return;
+        throw Exception("Purchase::setPrice(): got price: " + to_string(price));
     }
 
     this->price = price;
@@ -70,6 +75,11 @@ void Purchase::input() {
     float input_price;
     cout << "\nPrice: ";
     cin >> input_price;
+
+    if (price < 0) {
+        throw Exception("Purchase::input(): got price: " + to_string(input_price));
+    }
+
     setPrice(input_price);
 
     int input_quantity;

@@ -9,11 +9,15 @@
 #include "PurchaseCollection.h"
 
 int main() {
+	Purchase* newPur;
+	newPur = new CreditPurchase("TEST2", 99.0, 3, 3, "Belagro");	
+	newPur->output();
+	
     PurchaseCollection pc(1);
 
     CreditPurchase* pur1 = new CreditPurchase("Gold", 999.0, 1, 12, "Alfa");
     CreditPurchase* pur2 = new CreditPurchase("Apple", 9.0, 2, 1, "Belarus");
-    CreditPurchase* pur3 = new CreditPurchase("Silver", 99.0, 3, 3, "Belagro");
+    CreditPurchase pur3("Silver", 99.0, 3, 3, "Belagro");
     Purchase* pur4 = new Purchase("Milk", 1.33, 2);
     Purchase* pur5 = new Purchase("Cola", 2.33, 2);
     Purchase pur6("Bread", 1.00, 2);
@@ -25,43 +29,22 @@ int main() {
     pc += pur5;
     pc += pur6;
 
-    pc.print();
+    pc.output();
 
     pc.sort();
 
     cout << "\nAfter sort:\n";
-    pc.print();
-
-    FILE* f = fopen("Purchase.txt", "wt");
-    pur5->saveToFile(f);
-    fclose(f);
-
-    Purchase loadedPurchase;
-    f = fopen("Purchase.txt", "rt");
-    loadedPurchase.loadFromFile(f);
-    fclose(f);
-
-    cout << "\nPurchase loaded from file:\n";
-    loadedPurchase.output();
-
-    f = fopen("CreditPurchase.txt", "wt");
-    pur1->saveToFile(f);
-    fclose(f);
-
-    CreditPurchase loadedCreditPurchase;
-    f = fopen("CreditPurchase.txt", "rt");
-    loadedCreditPurchase.loadFromFile(f);
-    fclose(f);
-
-    cout << "\nCreditPurchase loaded from file:\n";
-    loadedCreditPurchase.output();
+    pc.output();
 
     pc.saveToFile("Collection.txt");
 
     PurchaseCollection pc2(1);
     pc2.loadFromFile("Collection.txt");
     cout << "\nLoaded collection:\n";
-    pc2.print();
+    pc2.output();
+    
+    PurchaseCollection pc3 = pc2;
+    pc3.output();
 
     return 0;
 }
