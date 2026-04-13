@@ -10,12 +10,13 @@ Purchase::Purchase() {
 
 Purchase::Purchase(string productName, float price, int quantity) {
     this->productName = productName;
-    this->price = 0;
     this->quantity = quantity;
 
     if (price < 0) {
         throw Exception("Purchase constructor got price: " + to_string(price));
     }
+
+    this->price = price;
 }
 
 Purchase::Purchase(const Purchase& pur) {
@@ -76,7 +77,7 @@ void Purchase::input() {
     cout << "\nPrice: ";
     cin >> input_price;
 
-    if (price < 0) {
+    if (input_price < 0) {
         throw Exception("Purchase::input(): got price: " + to_string(input_price));
     }
 

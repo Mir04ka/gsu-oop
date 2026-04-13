@@ -95,8 +95,7 @@ void PurchaseCollection::output() {
 void PurchaseCollection::saveToFile(string fileName) {
     FILE* f = fopen(fileName.c_str(), "wt");
     if (!f) {
-        cout << "\nFile not found\n";
-        return;
+        throw "PurchaseCollection::saveToFile: error opening file: " + fileName;
     }
     
     fprintf(f, "%d\n", size);
@@ -112,8 +111,7 @@ void PurchaseCollection::saveToFile(string fileName) {
 void PurchaseCollection::loadFromFile(string fileName) {
     FILE* f = fopen(fileName.c_str(), "rt");
     if (!f) {
-        cout << "\nFile not found\n";
-        return;
+        throw "PurchaseCollection::loadFromFile: error opening file: " + fileName;
     }
     
     int pcSize = size;
