@@ -56,8 +56,7 @@ void Purchase::setPrice(float price) {
 
 void Purchase::setQuantity(int quantity) {
     if (quantity < 0) {
-        cout << "\nQuantity must be positive or zero!\n";
-        return;
+        throw Exception("Purchase::setQuantity(): got quantity: " + to_string(quantity));
     }
 
     this->quantity = quantity;

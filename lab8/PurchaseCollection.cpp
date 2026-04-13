@@ -95,7 +95,7 @@ void PurchaseCollection::output() {
 void PurchaseCollection::saveToFile(string fileName) {
     FILE* f = fopen(fileName.c_str(), "wt");
     if (!f) {
-        throw "PurchaseCollection::saveToFile: error opening file: " + fileName;
+        throw string("PurchaseCollection::saveToFile: error opening file: ") + fileName;
     }
     
     fprintf(f, "%d\n", size);
@@ -111,7 +111,7 @@ void PurchaseCollection::saveToFile(string fileName) {
 void PurchaseCollection::loadFromFile(string fileName) {
     FILE* f = fopen(fileName.c_str(), "rt");
     if (!f) {
-        throw "PurchaseCollection::loadFromFile: error opening file: " + fileName;
+        throw string("PurchaseCollection::loadFromFile: error opening file: ") + fileName;
     }
     
     int pcSize = size;

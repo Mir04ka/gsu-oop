@@ -11,7 +11,6 @@
 int	main() {
 	freopen("logs.txt", "w", stderr);
 
-
 	Purchase* pur;
 
 	try {
@@ -29,7 +28,6 @@ int	main() {
 		}
 		catch (const Exception& e) {
 			cerr << e.getMessage() << endl;
-			cout << e.getMessage() << endl;
 		}
 	}
 
@@ -38,7 +36,6 @@ int	main() {
 	}
 	catch (const Exception& e) {
 		cerr << e.getMessage() << endl;
-		cout << e.getMessage() << endl;
 	}
 	pur->output();
 
@@ -50,7 +47,6 @@ int	main() {
 	}
 	catch (const string& e) {
 		cerr << e << endl;
-		cout << e << endl;
 	}
 
 	PurchaseCollection pc2(0);
@@ -60,7 +56,6 @@ int	main() {
 	}
 	catch (const string& e) {
 		cerr << e << endl;
-		cout << e << endl;
 	}
 
 	pc2.output();
