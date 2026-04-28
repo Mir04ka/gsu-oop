@@ -1,5 +1,7 @@
 #include "Purchase.h"
 
+#include <iomanip>
+
 #include "Exception.h"
 
 Purchase::Purchase() {
@@ -65,62 +67,67 @@ void Purchase::setQuantity(int quantity) {
 }
 
 void Purchase::output() {
-    cout << "\nProduct name: " << productName << "\nPrice: " << price << "\nQuantity: " << quantity << "\n";
+	cout << *this;
 }
 
 void Purchase::input() {
-    string input_name;
-    cout << "\nProduct name: ";
-    cin >> input_name;
-    setProductName(input_name);
-
-	float input_price;
-	while (true) {
-		cout << "\nPrice: ";
-    	cin >> input_price;
-		
-		try {
-			setPrice(input_price);
-			break;
-		}
-		catch (const Exception& e) {
-			cout << "\nWrong price!";
-		}
-	}
-
-    int input_quantity;
-    cout << "\nQuantity: ";
-    cin >> input_quantity;
-    setQuantity(input_quantity);
+	cout << "\nEnter Purchase:\n";
+	cin >> *this;
 }
 
-void Purchase::saveToFile(FILE* file) {
-    fprintf(file, "%s\n%s %f %d ", getType().c_str(), productName.c_str(), price, quantity);
+void Purchase::saveToFile(ostream& os) {
+    os << getType() << " " << productName << " " << price << " " << quantity << " ";
 }
 
-void Purchase::loadFromFile(FILE* file) {
-    char buffer[100];
+void Purchase::loadFromFile(istream& is) {
+    string n;
     float p;
     int q;
 
-    if (fscanf(file, "%99s %f %d ", buffer, &p, &q) == 3) {
-        setProductName(buffer);
+    if (is >> n >> p >> q) {
+        setProductName(n);
         setPrice(p);
         setQuantity(q);
-        return;
     }
-
-    cout << "\nFailed to load from file\n";
+    else {
+        throw "Failed to load from file";
+    }
 }
 
 string Purchase::getKey() {
     return "A" + productName;
 }
 
-string Purchase::getType() {
+string Purchase::getType() const {
     return "Purchase";
 }
 
 Purchase* Purchase::clone() const {
     return new Purchase(*this);
+}
+
+ostream& operator<< (ostream& os, const Purchase& p) {
+    os << p.getType() << ":\nName: " << p.productName << "\nPrice: " << fixed << setprecision(2) << p.price << "$\nQuantity: " << p.quantity << "\n";
+    return os;
+}
+
+istream& operator>> (istream& is, Purchase& p) {
+    string input_name;
+    is >> input_name;
+    p.setProductName(input_name);
+
+    float input_price;
+    is >> input_price;
+    try {
+        p.setPrice(input_price);
+    }
+    catch (const Exception& e) {
+        throw;
+    }
+
+    int input_quantity;
+    is >> input_quantity;
+    p.setQuantity(input_quantity);
+
+    return is;
 }

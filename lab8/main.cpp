@@ -10,32 +10,19 @@
 
 int	main() {
 	freopen("logs.txt", "w", stderr);
+	
+	Purchase* badPur = new Purchase("Cola", -3, 2);
+	badPur->output();
 
-	Purchase* pur;
-
-	try {
-		pur = new Purchase("Cola", 2.33, 2);
-	}
-	catch (const Exception& e) {
-		cerr << e.getMessage() << endl;
-		return 1;
-	}
-
-	while (true) {
-		try {
-			pur->input();
-			break;
-		}
-		catch (const Exception& e) {
-			cerr << e.getMessage() << endl;
-		}
-	}
+	Purchase* pur = new Purchase("Cola", 2.33, 2);
+	
+	pur->input();
 
 	try {
 		pur->setPrice(-1);
 	}
 	catch (const Exception& e) {
-		cerr << e.getMessage() << endl;
+		cerr << e.getMessage() << " Got: " << e.getBadArgument() << endl;
 	}
 	pur->output();
 
@@ -43,7 +30,7 @@ int	main() {
 	pc.add(pur);
 
 	try {
-		pc.saveToFile("Collection.txt");
+		pc.saveToFile("C:\Collection.txt");
 	}
 	catch (const string& e) {
 		cerr << e << endl;
@@ -59,6 +46,8 @@ int	main() {
 	}
 
 	pc2.output();
+	
+	delete badPur;
 
     return 0;
 }
