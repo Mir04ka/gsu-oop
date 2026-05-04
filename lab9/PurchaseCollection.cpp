@@ -129,38 +129,6 @@ void PurchaseCollection::loadFromFile(string fileName) {
         curPur->loadFromFile(fin);
         add(curPur);
     }
-
- //    FILE* f = fopen(fileName.c_str(), "rt");
- //    if (!f) {
- //        throw string("PurchaseCollection::loadFromFile: error opening file: ") + fileName;
- //    }
- //
- //    int pcSize = size;
- //    for (int i = 0; i < pcSize; i++) {
- //    	remove(0);
-	// }
- //
- //    int collectionSize;
- //    fscanf(f, "%d\n", &collectionSize);
- //
- //    char type[100];
- //
- //    for (int i = 0; i < collectionSize; i++) {
- //    	fscanf(f, "%99s", type);
- //    	Purchase* curPur;
- //
- //        if (string(type) == "Purchase") {
- //            curPur = new Purchase;
- //        }
- //        else {
- //            curPur = new CreditPurchase;
- //        }
- //
- //        curPur->loadFromFile(f);
- //        add(curPur);
-	// }
- //
- //    fclose(f);
 }
 
 void PurchaseCollection::operator+= (Purchase* p) {
